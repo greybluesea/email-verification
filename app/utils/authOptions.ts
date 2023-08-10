@@ -15,11 +15,11 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: {
-          label: "email",
+          label: "Email",
           type: "text",
         },
         password: {
-          label: "password",
+          label: "Password",
           type: "password",
         },
       },
@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid Credentials");
         }
 
-        const user = await prisma.user.findUnique({
+        /*  const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
@@ -42,11 +42,12 @@ export const authOptions: NextAuthOptions = {
           credentials.password,
           user.hashedPassword
         );
-
+ 
         if (!isCorrectPassword) {
           throw new Error("Incorrect Password");
         }
-        return user;
+        return user;*/
+        return null;
       },
     }),
   ],
