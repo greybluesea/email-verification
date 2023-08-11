@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Providers from "./utils/providers";
 
 import SigninSignoutButton from "./components/SigninSignoutButton";
+import CurrentUser from "./components/CurrentUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <main className="flex h-screen flex-col items-center p-24">
-            <div className="z-10 max-w-5xl w-full items-center justify-between  lg:flex">
-              <div></div>
+          <main className="flex h-screen flex-col items-center p-24 text-gray-300">
+            <div className="z-10 max-w-5xl w-full flex items-center justify-between ">
+              <CurrentUser />
               <SigninSignoutButton />
             </div>
-
             {children}
           </main>
         </Providers>

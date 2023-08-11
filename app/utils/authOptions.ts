@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
             return userWithoutPassword;}
             else throw new Error("Invalid Credentials"); */
 
-        const res = await fetch("/api/login", {
+        const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
           body: JSON.stringify({
             email: credentials.email,
@@ -61,7 +61,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }), */
   ],
-  debug: process.env.NODE_ENV === "development",
+  // debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
