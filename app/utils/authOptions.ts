@@ -1,10 +1,9 @@
 import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
-import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GithubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+/* import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google"; */
 
 import prisma from "@/prisma/prismaClient";
 
@@ -28,28 +27,39 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid Credentials");
         }
 
-        /*  const user = await prisma.user.findUnique({
+        /*  const user = await prisma.user.findFirst({
           where: {
             email: credentials.email,
           },
         });
 
-        if (!user || !user?.hashedPassword) {
-          throw new Error("Invalid Credentials");
-        }
+        if (user && (await bcrypt.compare(credentials.password, user.hashedPassword))) {
+          const { hashedPassword, ...userWithoutPassword } = user;
+            return userWithoutPassword;}
+            else throw new Error("Invalid Credentials"); */
 
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
- 
-        if (!isCorrectPassword) {
-          throw new Error("Incorrect Password");
-        }
-        return user;*/
-        return null;
+        const res = await fetch("/api/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password,
+          }),
+        });
+
+        const user = await res.json();
+
+        if (res.ok && user) return user;
+        else return null;
       },
     }),
+    /*  GithubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }), */
   ],
   debug: process.env.NODE_ENV === "development",
   session: {
