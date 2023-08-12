@@ -9,8 +9,9 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
   useEffect(() => {
-    if (session && session.user) router.push("/post/user/" + session.user.id);
-  }, [session]);
+    if (status === "authenticated")
+      router.push("/post/user/" + session.user.id);
+  }, [status]);
 
   return (
     <>
