@@ -1,5 +1,5 @@
 /* import { signJwtAccessToken } from "@/lib/jwt"; */
-import { fetchJWT } from "@/app/utils/jwt";
+import { fetchJWT } from "@/app/utils/unused/jwt";
 import prisma from "@/prisma/prismaClient";
 import * as bcrypt from "bcrypt";
 

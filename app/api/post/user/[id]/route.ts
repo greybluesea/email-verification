@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/utils/authOptions";
-import { verifyJWT } from "@/app/utils/jwt";
+import { verifyJWT } from "@/app/utils/unused/jwt";
 import prisma from "@/prisma/prismaClient";
 import { getServerSession } from "next-auth";
 

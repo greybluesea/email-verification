@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
           user &&
           (await bcrypt.compare(credentials.password, user.hashedPassword))
         )
-          return user;
+          return user as any;
         else return null;
 
         /////////

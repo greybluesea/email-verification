@@ -3,7 +3,7 @@ import PostCard from "@/app/components/PostCard";
 import UserProfile from "@/app/components/UserProfile";
 import { authOptions } from "@/app/utils/authOptions";
 import getUserPosts from "@/app/utils/getUserPosts";
-import { verifyJWT } from "@/app/utils/jwt";
+import { verifyJWT } from "@/app/utils/unused/jwt";
 import { getServerSession } from "next-auth";
 import { title } from "process";
 import React from "react";
