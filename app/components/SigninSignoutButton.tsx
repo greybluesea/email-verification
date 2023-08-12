@@ -22,7 +22,10 @@ const SigninSignoutButton = (props: Props) => {
     );
   }
   return (
-    <button onClick={() => signIn()} className=" bg-green-600 btn">
+    <button
+      onClick={() => signIn(undefined, { callbackUrl: "/post/user" })}
+      className=" bg-green-600 btn"
+    >
       Sign In
     </button>
   );
