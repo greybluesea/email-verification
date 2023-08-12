@@ -9,7 +9,7 @@ interface SigninRequestBody {
 }
 
 export async function POST(request: Request) {
-  const body: SigninRequestBody = await request.json();
+  /* const body: SigninRequestBody = await request.json();
 
   const user = await prisma.user.findFirst({
     where: {
@@ -26,5 +26,6 @@ export async function POST(request: Request) {
     };
 
     return new Response(JSON.stringify(userWithJWT));
-  } else return new Response(JSON.stringify(null));
+  } else return new Response(null); */
+  return new Response("this api is not in use");
 }
