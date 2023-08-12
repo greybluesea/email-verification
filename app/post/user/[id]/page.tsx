@@ -3,6 +3,7 @@ import PostCard from "@/app/components/PostCard";
 import UserProfile from "@/app/components/UserProfile";
 import { authOptions } from "@/app/utils/authOptions";
 import getUserPosts from "@/app/utils/getUserPosts";
+import { verifyJWT } from "@/app/utils/jwt";
 import { getServerSession } from "next-auth";
 import { title } from "process";
 import React from "react";
@@ -20,6 +21,9 @@ const page = async ({ params }: { params: { id: number } }) => {
    */
 
   if (session?.user.id != params.id) return <div>{"unauthorized!"}</div>;
+
+  if (!accessToken || !verifyJWT(accessToken))
+    return <div>{"unauthorized!"}</div>;
 
   const userPosts = await getUserPosts(+params.id);
 
