@@ -1,16 +1,24 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type Props = {};
 
 const SigninSignoutButton = (props: Props) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
   /* console.log(session); */
 
-  if (session && session.user) {
+  if (status === "authenticated") {
     return (
-      <button onClick={() => signOut()} className="bg-red-600 btn">
+      <button
+        onClick={() => {
+          router.push("/");
+          signOut();
+        }}
+        className="bg-red-600 btn"
+      >
         Sign Out
       </button>
     );

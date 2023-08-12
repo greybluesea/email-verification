@@ -5,15 +5,18 @@ import React from "react";
 type Props = {};
 
 const CurrentUser = (props: Props) => {
-  const { data: session } = useSession();
-  if (session && session.user)
+  const { data: session, status } = useSession();
+  if (status === "authenticated")
     return (
       <p className="space-x-5">
-        <span className="bg-sky-600 btn py-3">
-          <Link href={"/post/user/" + session.user.id}>
+        <div>
+          <Link
+            href={"/post/user/" + session.user.id}
+            className="bg-sky-600 btn py-3"
+          >
             {"CurrentUser: " + session.user.name}
           </Link>
-        </span>
+        </div>
         {/* <span className="bg-sky-600 btn">
           <Link href="/">{"Home"}</Link>
         </span> */}

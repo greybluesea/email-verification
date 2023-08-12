@@ -1,3 +1,4 @@
+import Backdrop from "@/app/components/Backdrop";
 import PostCard from "@/app/components/PostCard";
 import UserProfile from "@/app/components/UserProfile";
 import { authOptions } from "@/app/utils/authOptions";
@@ -23,25 +24,29 @@ const page = async ({ params }: { params: { id: number } }) => {
   const userPosts = await getUserPosts(+params.id);
 
   return (
-    <div className="max-w-5xl w-full flex justify-start ">
-      <div className="flex flex-col items-start">
-        <br />
-        {/* <h2>User Profile:</h2> */}
-        <div>Email: {JSON.stringify(simpliedUser.email)}</div>
-        <br />
-        <h3>Posts:</h3>
-        {/* <div className="flex flex-wrap">{JSON.stringify(userPosts)}</div> */}
-        {userPosts.map((post) => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            content={post.content || ""}
-            published={post.published}
-            author={post.author.name}
-          />
-        ))}
+    <>
+      <div className="fixed flex h-screen w-full max-w-[1220px] flex-col items-center p-24 ">
+        <div className="flex flex-col items-start">
+          <div>Email: {JSON.stringify(simpliedUser.email)}</div>
+          <br />
+          <h3>Posts:</h3>
+
+          <div className="flex flex-row flex-wrap justify-center gap-6 ">
+            {userPosts.map((post) => (
+              <PostCard
+                key={post.id}
+                title={post.title}
+                content={post.content || ""}
+                published={post.published}
+                author={post.author.name}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* <Backdrop /> */}
+    </>
   );
 };
 
