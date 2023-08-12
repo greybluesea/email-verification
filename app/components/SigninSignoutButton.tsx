@@ -6,7 +6,7 @@ type Props = {};
 
 const SigninSignoutButton = (props: Props) => {
   const { data: session } = useSession();
-  console.log(session);
+  /* console.log(session); */
 
   if (session && session.user) {
     return (

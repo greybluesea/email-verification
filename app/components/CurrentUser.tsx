@@ -9,15 +9,17 @@ const CurrentUser = (props: Props) => {
   if (session && session.user)
     return (
       <p className="space-x-5">
-        <span className="text-sky-600">
-          {"CurrentUser: " + session.user.name}
+        <span className="bg-sky-600 btn">
+          <Link href={"/post/user/" + session.user.id}>
+            {"CurrentUser: " + session.user.name}
+          </Link>
         </span>
         <span className="bg-sky-600 btn">
-          <Link href="/"> {"HomePage"}</Link>
+          <Link href="/"> {"Home"}</Link>
         </span>
-        <span className="bg-sky-600 btn">
+        {/*  <span className="bg-sky-600 btn">
           <Link href="/contentpage"> {"ContentPage"}</Link>
-        </span>
+        </span> */}
       </p>
     );
 };

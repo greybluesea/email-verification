@@ -1,12 +1,12 @@
-/* import { verifyJwt } from "@/lib/jwt"; */
+import { verifyJWT } from "@/app/utils/jwt";
 import prisma from "@/prisma/prismaClient";
+import { getServerSession } from "next-auth";
 
 export async function GET(
   request: Request,
   { params }: { params: { id: number } }
 ) {
-  /*  const accessToken = request.headers.get("authorization");
-  if (!accessToken  || !verifyJwt(accessToken) ) {
+  /* if (!accessToken || !verifyJWT(accessToken)) {
     return new Response(
       JSON.stringify({
         error: "unauthorized",
@@ -16,6 +16,24 @@ export async function GET(
       }
     );
   } */
+
+  /* const session = await getServerSession();
+  if (session) {
+    console.log(session);
+    console.log(session?.user.id);
+  }
+  return new Response(JSON.stringify(session)); */
+
+  /* const session = await getServerSession();
+  if (!session || session.user.id != params.id)
+    return new Response(
+      JSON.stringify({
+        error: "unauthorized",
+      }),
+      {
+        status: 401,
+      }
+    ); */
 
   const userPosts = await prisma.post.findMany({
     where: { authorId: +params.id },

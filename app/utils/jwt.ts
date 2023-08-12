@@ -19,7 +19,7 @@ export function fetchJWT(
 
 export function verifyJWT(token: string) {
   try {
-    const secret = process.env.SECRET_KEY;
+    const secret = process.env.JWT_SECRET;
     const decoded = jwt.verify(token, secret!);
     return decoded as JwtPayload;
   } catch (error) {
