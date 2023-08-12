@@ -1,3 +1,4 @@
+import { authOptions } from "@/app/utils/authOptions";
 import { verifyJWT } from "@/app/utils/jwt";
 import prisma from "@/prisma/prismaClient";
 import { getServerSession } from "next-auth";
@@ -6,7 +7,10 @@ export async function GET(
   request: Request,
   { params }: { params: { id: number } }
 ) {
-  /* if (!accessToken || !verifyJWT(accessToken)) {
+  /* const accessToken = await request.headers.get("authorization");
+return new Response(JSON.stringify(accessToken));
+  console.log(accessToken);
+  if (!accessToken || !verifyJWT(accessToken)) {
     return new Response(
       JSON.stringify({
         error: "unauthorized",
@@ -16,16 +20,12 @@ export async function GET(
       }
     );
   } */
-
-  /* const session = await getServerSession();
-  if (session) {
-    console.log(session);
-    console.log(session?.user.id);
-  }
+  //////
+  /*  const session = await getServerSession(authOptions);
+  console.log(session);
   return new Response(JSON.stringify(session)); */
-
-  /* const session = await getServerSession();
-  if (!session || session.user.id != params.id)
+  /* if (!session || !session.user.accessToken) {
+    console.log(session);
     return new Response(
       JSON.stringify({
         error: "unauthorized",
@@ -33,9 +33,10 @@ export async function GET(
       {
         status: 401,
       }
-    ); */
-
-  const userPosts = await prisma.post.findMany({
+    );
+  } */
+  ///////
+  /* const userPosts = await prisma.post.findMany({
     where: { authorId: +params.id },
     include: {
       author: {
@@ -47,5 +48,6 @@ export async function GET(
     },
   });
 
-  return new Response(JSON.stringify(userPosts));
+  return new Response(JSON.stringify(userPosts)); */
+  return new Response("this API is not in use");
 }
