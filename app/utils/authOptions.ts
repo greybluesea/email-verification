@@ -46,9 +46,9 @@ export const authOptions: NextAuthOptions = {
           }),
         });
 
-        const userWithoutPassword = await res.json();
+        const userWithJWT = await res.json();
 
-        if (res.ok && userWithoutPassword) return userWithoutPassword;
+        if (res.ok && userWithJWT) return userWithJWT;
         else return null;
       },
     }),
