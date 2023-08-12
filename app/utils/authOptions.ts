@@ -24,21 +24,24 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid Credentials");
+          return null;
         }
 
-        /*  const user = await prisma.user.findFirst({
+        const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
           },
         });
 
-        if (user && (await bcrypt.compare(credentials.password, user.hashedPassword))) {
-          const { hashedPassword, ...userWithoutPassword } = user;
-            return userWithoutPassword;}
-            else throw new Error("Invalid Credentials"); */
+        if (
+          user &&
+          (await bcrypt.compare(credentials.password, user.hashedPassword))
+        )
+          return user;
+        else return null;
 
-        const res = await fetch("http://localhost:3000/api/login", {
+        /////////
+        /*  const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
           body: JSON.stringify({
             email: credentials.email,
@@ -49,7 +52,7 @@ export const authOptions: NextAuthOptions = {
         const userWithJWT = await res.json();
 
         if (res.ok && userWithJWT) return userWithJWT;
-        else return null;
+        else return null; */
       },
     }),
     /*  GithubProvider({
@@ -67,11 +70,21 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token, user }) {
+    /*  async jwt({ token, user }) {
+      // console.log(token, user);
       return { ...token, ...user };
     },
     async session({ session, token }) {
+      console.log(session, token);
       session.user = token as any;
+      return session;
+    }, */
+
+    async session({ session, token }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+
+      session.user.id = token.sub as any;
+
       return session;
     },
   },

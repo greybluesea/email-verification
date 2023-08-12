@@ -22,8 +22,8 @@ const page = async ({ params }: { params: { id: number } }) => {
 
   if (session?.user.id != params.id) return <div>{"unauthorized!"}</div>;
 
-  if (!accessToken || !verifyJWT(accessToken))
-    return <div>{"unauthorized!"}</div>;
+  /* if (!accessToken || !verifyJWT(accessToken))
+    return <div>{"unauthorized!"}</div>; */
 
   const userPosts = await getUserPosts(+params.id);
 
