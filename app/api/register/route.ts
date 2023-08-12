@@ -1,14 +1,14 @@
 import prisma from "@/prisma/prismaClient";
 import * as bcrypt from "bcrypt";
 
-interface RequestBody {
+interface RegisterRequestBody {
   name: string;
   email: string;
   password: string;
 }
 
 export async function POST(request: Request) {
-  const body: RequestBody = await request.json();
+  const body: RegisterRequestBody = await request.json();
 
   const user = await prisma.user.create({
     data: {
@@ -18,6 +18,6 @@ export async function POST(request: Request) {
     },
   });
 
-  const { hashedPassword, ...result } = user;
-  return new Response(JSON.stringify(result));
+  const { hashedPassword, ...userWithoutPassword } = user;
+  return new Response(JSON.stringify(userWithoutPassword));
 }

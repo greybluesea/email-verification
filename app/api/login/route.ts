@@ -2,12 +2,13 @@
 import prisma from "@/prisma/prismaClient";
 import * as bcrypt from "bcrypt";
 
-interface RequestBody {
+interface SigninRequestBody {
   email: string;
   password: string;
 }
+
 export async function POST(request: Request) {
-  const body: RequestBody = await request.json();
+  const body: SigninRequestBody = await request.json();
 
   const user = await prisma.user.findFirst({
     where: {
