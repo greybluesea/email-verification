@@ -35,11 +35,6 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        /* if (user && !user.emailVerified) {
-          throw new Error("Please check for your email verification.");
-          redirect("/emailverify");
-        } */
-
         if (
           user &&
           (await bcrypt.compare(credentials.password, user.hashedPassword))

@@ -4,11 +4,15 @@ import prisma from "@/prisma/prismaClient";
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 //import { signIn } from "next-auth/react";
+import { randomUUID } from "crypto";
+
+import transporter from "../utils/nodemailer";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
 type Props = {};
 
 const page = (props: Props) => {
-  async function createUser(data: FormData) {
+  async function registerUser(data: FormData) {
     "use server";
     const user = await prisma.user.create({
       data: {
@@ -22,34 +26,39 @@ const page = (props: Props) => {
       return { error: "Something went wrong" };
     } else {
       const { hashedPassword, ...userWithoutPassword } = user;
-      console.log(userWithoutPassword);
+      //  console.log(userWithoutPassword);
 
-      /*  const token = await prisma.activateToken.create({
-      data: {
-        userId: user.id,
-        token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ''),
-      },
-    }) */
-      /*  signIn(
-        "credentials",
-        {
-          email: data.get("email") as string,
-          password: data.get("password") as string,
+      const token = await prisma.verifyToken.create({
+        data: {
+          userId: user.id,
+          token: `${randomUUID()}${randomUUID()}`.replace(/-/g, ""),
         },
-        { callbackUrl: "/" }
-      ); */
+      });
+
+      const info = await transporter.sendMail({
+        from: `"EmailVerifier"<${process.env.HOTMAIL_ADDRESS}>`, // sender address
+        to: user.email, // list of receivers
+        subject: "Email Verification ✔", // Subject line
+        text: `Hello ${capitalizeFirstLetter(
+          user.name
+        )}, please click on the link below to verify your email address: `, // plain text body
+        html: `<a>http://localhost:3000/verification/${token.token}</a>`, // html body
+      });
+
+      console.log("Message sent: " + user.name + " ", info.messageId);
+
       redirect("/register/success");
     }
   }
 
   return (
-    <form action={createUser} className="max-w-sm py-4 px-8 space-y-3">
+    <form action={registerUser} className="max-w-sm py-4 px-8 space-y-3">
       <InputItem name={"name"} type="text" />
       <InputItem name={"email"} />
       <InputItem name={"password"} />
       <div className="pt-3">
         <button type="submit" className="bg-orange-600 btn flex w-full">
-          Register as a new user
+          Register as a New User
         </button>
       </div>
     </form>
