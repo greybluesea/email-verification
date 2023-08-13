@@ -12,9 +12,9 @@ const SigninSignoutButton = (props: Props) => {
   if (status === "authenticated") {
     return (
       <button
-        onClick={() => {
-          signOut({ callbackUrl: "/" });
-        }}
+        onClick={() =>
+          signOut({ callbackUrl: "/" || process.env.NEXTAUTH_URL })
+        }
         className="bg-red-600 btn"
       >
         Sign Out

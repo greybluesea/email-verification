@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       // token.emailVerified = user.emailVerified as any;
-      console.log(token, user);
+      //  console.log(token, user);
       return { ...token, ...user };
     },
 
@@ -92,7 +92,7 @@ export const authOptions: NextAuthOptions = {
 
       session.user.id = token.sub as any;
       session.user.emailVerified = token.emailVerified as any;
-      console.log(session);
+      // console.log(session);
       return session;
     },
   },
