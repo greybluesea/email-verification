@@ -5,6 +5,7 @@ import { authOptions } from "@/app/utils/authOptions";
 import getUserPosts from "@/app/utils/getUserPosts";
 import { verifyJWT } from "@/app/utils/unused/jwt";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { title } from "process";
 import React from "react";
 
@@ -19,6 +20,7 @@ const page = async ({ params }: { params: { id: number } }) => {
    
    const userPosts = await res.json();
    */
+  if (!session?.user.emailVerified) redirect("/emailverify");
 
   if (session?.user.id != params.id) return <div>{"unauthorized!"}</div>;
 

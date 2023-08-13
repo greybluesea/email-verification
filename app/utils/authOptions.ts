@@ -94,7 +94,7 @@ export const authOptions: NextAuthOptions = {
 
       session.user.id = token.sub as any;
       session.user.emailVerified = token.emailVerified as any;
-      console.log(session);
+      // console.log(session);
       return session;
     },
   },
