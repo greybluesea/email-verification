@@ -39,10 +39,14 @@ const page = (props: Props) => {
         from: `"EmailVerifier"<${process.env.HOTMAIL_ADDRESS}>`, // sender address
         to: user.email, // list of receivers
         subject: "Email Verification ✔", // Subject line
-        text: `Hello ${capitalizeFirstLetter(
+        /* text: `Hello ${capitalizeFirstLetter(
           user.name
-        )}, please click on the link below to verify your email address: `, // plain text body
-        html: `<a>http://localhost:3000/verification/${token.token}</a>`, // html body
+        )}, please click on the link below to verify your email address: `, */ // plain text body
+        html: `<p>Hello ${capitalizeFirstLetter(
+          user.name
+        )}, please click on the link below to verify your email address: </p> <p><a>http://localhost:3000/verification/${
+          token.token
+        }</a></p> `, // html body
       });
 
       console.log("Message sent: " + user.name + " ", info.messageId);
