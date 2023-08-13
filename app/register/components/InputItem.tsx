@@ -35,7 +35,7 @@ const InputItem: React.FC<InputProps> = ({
         w-full
         rounded-md
         border-0
-        pl-2
+        pl-4
         py-1.5 
         shadow-sm
         ring-1

@@ -38,8 +38,10 @@ export const authOptions: NextAuthOptions = {
         if (
           user &&
           (await bcrypt.compare(credentials.password, user.hashedPassword))
-        )
-          return user as any;
+        ) {
+          const { hashedPassword, ...userWithoutPassword } = user;
+          return userWithoutPassword as any;
+        }
         //return null;
         else throw new Error("Invalid credentials");
 
@@ -73,9 +75,10 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async jwt({ token }) {
+    async jwt({ token, user }) {
       // token.emailVerified = user.emailVerified as any;
-      return token;
+      console.log(token, user);
+      return { ...token, ...user };
     },
 
     /* async session({ session, token }) {
@@ -89,7 +92,7 @@ export const authOptions: NextAuthOptions = {
 
       session.user.id = token.sub as any;
       session.user.emailVerified = token.emailVerified as any;
-      // console.log(session);
+      console.log(session);
       return session;
     },
   },

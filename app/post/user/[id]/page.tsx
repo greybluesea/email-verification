@@ -20,9 +20,13 @@ const page = async ({ params }: { params: { id: number } }) => {
    
    const userPosts = await res.json();
    */
-  if (!session?.user.emailVerified) redirect("/emailverify");
+  if (!session?.user.emailVerified)
+    return (
+      <div className="mt-20">{"Please check your email for verification."}</div>
+    );
 
-  if (session?.user.id != params.id) return <div>{"unauthorized!"}</div>;
+  if (session?.user.id != params.id)
+    return <div className="mt-20">{"unauthorized!"}</div>;
 
   /* if (!accessToken || !verifyJWT(accessToken))
     return <div>{"unauthorized!"}</div>; */

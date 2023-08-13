@@ -9,8 +9,8 @@ const Footer = (props: Props) => {
         <li>NextAuth + Email Verification(NodeMailer)</li>
         <li>Prisma + Postgres + schema migrations for change</li>
         <li>customized ‘session’ object + server action for Register form</li>
-        <li>Learned from Sakura Dev, Antonio, & Ethan Mick</li>
-        <li>Powered by greybluesea</li>
+        <li>learned from Sakura Dev, Antonio, & Ethan Mick</li>
+        <li>powered by greybluesea</li>
       </ul>
     </footer>
   );
