@@ -38,7 +38,7 @@ export async function GET(
     throw new Error("Token is invalid or expired");
   }
 
-  await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: {
       id: user.id,
     },
@@ -47,7 +47,7 @@ export async function GET(
     },
   });
 
-  await prisma.verifyToken.update({
+  const updatedToken = await prisma.verifyToken.update({
     where: {
       token,
     },
@@ -56,5 +56,5 @@ export async function GET(
     },
   });
 
-  redirect("/post/user");
+  if (updatedUser && updatedToken) redirect("/verification/success");
 }

@@ -44,7 +44,7 @@ const page = (props: Props) => {
         )}, please click on the link below to verify your email address: `, */ // plain text body
         html: `<p>Hello ${capitalizeFirstLetter(
           user.name
-        )}, </p>  <p>Please click on the link below to verify your email address:<a href="${
+        )}, </p>  <p>Please click on the link below to verify your email address: <a href="${
           process.env.NEXTAUTH_URL
         }/api/verification/${token.token}">${
           process.env.NEXTAUTH_URL
