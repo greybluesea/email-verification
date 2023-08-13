@@ -7,6 +7,7 @@ import SigninSignoutButton from "./components/SigninSignoutButton";
 import CurrentUser from "./components/CurrentUser";
 import RegisterButton from "./components/RegisterButton";
 import Backdrop from "./components/Backdrop";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
             </div>
             {children}
             <Backdrop />
+            <Footer />
           </main>
         </Providers>
       </body>
