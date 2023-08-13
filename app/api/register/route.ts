@@ -8,7 +8,7 @@ interface RegisterRequestBody {
 }
 
 export async function POST(request: Request) {
-  const body: RegisterRequestBody = await request.json();
+  /*  const body: RegisterRequestBody = await request.json();
 
   const user = await prisma.user.create({
     data: {
@@ -19,5 +19,6 @@ export async function POST(request: Request) {
   });
 
   const { hashedPassword, ...userWithoutPassword } = user;
-  return new Response(JSON.stringify(userWithoutPassword));
+  return new Response(JSON.stringify(userWithoutPassword)); */
+  return new Response("this route is currently not in use");
 }

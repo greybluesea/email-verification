@@ -45,13 +45,30 @@ const page = (props: Props) => {
         html: `<p>Hello ${capitalizeFirstLetter(
           user.name
         )}, </p>  <p>Please click on the link below to verify your email address:<a href="${
-          token.token
-        }">${process.env.NEXTAUTH_URL}/api/verification/${
-          token.token
-        }</a></p> `, // html body
+          process.env.NEXTAUTH_URL
+        }/api/verification/${token.token}">${
+          process.env.NEXTAUTH_URL
+        }/api/verification/${token.token}</a></p> `, // html body
       });
 
-      console.log("Message sent: " + user.name + " ", info.messageId);
+      console.log(
+        "Verification email sent to: " + user.name + " ",
+        info.messageId
+      );
+
+      /*  setTimeout(async () => {
+        await fetch(`${process.env.NEXTAUTH_URL}/api/auth/authorize`, {
+          method: "POST",
+          body: JSON.stringify({
+            email: data.get("email") as string,
+            password: data.get("password") as string,
+          }),
+        });
+      }, 5000);
+
+      setTimeout(() => {
+        redirect("/post/user");
+      }, 9000); */
 
       redirect("/register/success");
     }
