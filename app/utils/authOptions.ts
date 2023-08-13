@@ -6,6 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google"; */
 
 import prisma from "@/prisma/prismaClient";
+import { redirect } from "next/navigation";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -33,6 +34,11 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
+
+        /* if (user && !user.emailVerified) {
+          throw new Error("Please check for your email verification.");
+          redirect("/emailverify");
+        } */
 
         if (
           user &&
@@ -72,11 +78,12 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    /*  async jwt({ token, user }) {
-      // console.log(token, user);
-      return { ...token, ...user };
+    async jwt({ token }) {
+      // token.emailVerified = user.emailVerified as any;
+      return token;
     },
-    async session({ session, token }) {
+
+    /* async session({ session, token }) {
       console.log(session, token);
       session.user = token as any;
       return session;
@@ -86,7 +93,8 @@ export const authOptions: NextAuthOptions = {
       // Send properties to the client, like an access_token and user id from a provider.
 
       session.user.id = token.sub as any;
-
+      session.user.emailVerified = token.emailVerified as any;
+      console.log(session);
       return session;
     },
   },

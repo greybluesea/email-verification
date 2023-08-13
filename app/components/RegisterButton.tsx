@@ -14,7 +14,11 @@ const RegisterButton = (props: Props) => {
   if (status === "authenticated") {
     return null;
   }
-  if (pathname === "/register")
+  if (
+    pathname === "/register" ||
+    pathname === "/register/success" ||
+    pathname === "/emailverify"
+  )
     return (
       <button
         onClick={() => {

@@ -38,7 +38,7 @@ const page = (props: Props) => {
         },
         { callbackUrl: "/" }
       ); */
-      redirect("api/auth/signin");
+      redirect("/register/success");
     }
   }
 
