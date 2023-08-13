@@ -30,7 +30,7 @@ const page = async ({ params }: { params: { id: number } }) => {
   return (
     <>
       <div className="fixed flex h-screen w-full max-w-[1220px] flex-col items-center p-24 ">
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start w-full">
           <h3>Email: {simpliedUser.email}</h3>
           <br />
           <h3>Posts:</h3>

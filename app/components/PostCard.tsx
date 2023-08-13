@@ -8,7 +8,7 @@ type Props = {
   published: boolean;
 };
 
-const PostCard = ({ title, author, content = "", published }: Props) => {
+const PostCard = ({ title, author, content, published }: Props) => {
   return (
     <div className="block w-[500px] py-6 px-9 rounded-md my-3 bg-slate-700 text-slate-300 ">
       <section

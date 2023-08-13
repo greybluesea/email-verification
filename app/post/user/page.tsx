@@ -7,7 +7,7 @@ type Props = {};
 
 const page = async (props: Props) => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+  /* console.log(session); */
 
   redirect("/post/user/" + session?.user.id);
   return <div></div>;

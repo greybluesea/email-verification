@@ -24,7 +24,8 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          // return null;
+          throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
@@ -38,7 +39,8 @@ export const authOptions: NextAuthOptions = {
           (await bcrypt.compare(credentials.password, user.hashedPassword))
         )
           return user as any;
-        else return null;
+        //return null;
+        else throw new Error("Invalid credentials");
 
         /////////
         /*  const res = await fetch("http://localhost:3000/api/login", {
@@ -87,5 +89,8 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
+  },
+  pages: {
+    newUser: "/register",
   },
 };
