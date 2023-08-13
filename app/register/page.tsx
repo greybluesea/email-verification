@@ -44,9 +44,9 @@ const page = (props: Props) => {
         )}, please click on the link below to verify your email address: `, */ // plain text body
         html: `<p>Hello ${capitalizeFirstLetter(
           user.name
-        )}, please click on the link below to verify your email address: </p> <p><a>http://localhost:3000/verification/${
-          token.token
-        }</a></p> `, // html body
+        )}, please click on the link below to verify your email address: </p> <p><a>${
+          process.env.NEXTAUTH_URL
+        }/verification/${token.token}</a></p> `, // html body
       });
 
       console.log("Message sent: " + user.name + " ", info.messageId);
