@@ -36,7 +36,7 @@ const page = (props: Props) => {
       });
 
       const info = await transporter.sendMail({
-        from: `"EmailVerifier"<${process.env.HOTMAIL_ADDRESS}>`, // sender address
+        from: `"EmailVerifier"<${process.env.BESTMAIL_ADDRESS}>`, // sender address
         to: user.email, // list of receivers
         subject: "Email Verification ✔", // Subject line
         /* text: `Hello ${capitalizeFirstLetter(
