@@ -56,5 +56,5 @@ export async function GET(
     },
   });
 
-  if (updatedUser && updatedToken) redirect("/verification/success");
+  if (updatedUser && updatedToken) redirect("api/verification/success");
 }
