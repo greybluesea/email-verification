@@ -6,8 +6,8 @@ const transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: process.env.HOTMAIL_ADDRESS,
-    pass: process.env.HOTMAIL_SECRET,
+    user: process.env.MAIL_ADDRESS,
+    pass: process.env.MAIL_SECRET,
   },
 });
 
